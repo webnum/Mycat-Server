@@ -285,7 +285,7 @@ dataHost是实际的物理库配置地址，可以配置多主主从等其他配
 ## 配置Mycat环境参数
     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
     <!DOCTYPE mycat:server SYSTEM "server.dtd">
-    <mycat:server xmlns:mycat="http://org.opencloudb/">
+    <mycat:server xmlns:mycat="http://io.mycat/">
        <system>
     	  <property name="defaultSqlParser">druidparser</property>
         </system> 
@@ -301,7 +301,7 @@ dataHost是实际的物理库配置地址，可以配置多主主从等其他配
 
     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
     <!DOCTYPE mycat:server SYSTEM "server.dtd">
-    <mycat:server xmlns:mycat="http://org.opencloudb/">
+    <mycat:server xmlns:mycat="http://io.mycat/">
 	<user name="mycat">
 		<property name="password">mycat</property>
 		<property name="schemas">TESTDB</property>
@@ -321,7 +321,7 @@ Mycat作为一个中间件，实现mysql协议那么对前端应用连接来说�
 	<?xml version="1.0" encoding="UTF-8"?>
 	<!DOCTYPE mycat:schema SYSTEM "schema.dtd">
 	
-	<mycat:schema  xmlns:mycat="http://org.opencloudb/">
+	<mycat:schema  xmlns:mycat="http://io.mycat/">
 	  <schema name="TESTDB" checkSQLschema="true" sqlMaxLimit="100" dataNode="dn1">
 	      <table name="t_user" dataNode="dn1,dn2" rule="sharding-by-mod2"/>
 	      <table name="ht_jy_login_log" primaryKey="ID" dataNode="dn1,dn2" rule="sharding-by-date_jylog"/>
@@ -393,7 +393,7 @@ dataHost 标签中的 writeType balance 等标签则是不同的策略，具体�
 	    </rule>
 	  </tableRule>
 	  
-	  <function name="sharding-by-hour" class="org.opencloudb.route.function.LatestMonthPartion">
+	  <function name="sharding-by-hour" class="io.mycat.route.function.LatestMonthPartion">
 	    <property name="splitOneDay">24</property>
 	  </function>
 	   
@@ -418,7 +418,7 @@ function 配置是分片规则的配置。
 
 name 为切分规则的名称，名字人员取，但是需要与tableRule 中匹配。
 
-class 是切分规则对应的切分类，写死，需要哪种规则则配置哪种，例如本例子是按小时分片：org.opencloudb.route.function.LatestMonthPartion
+class 是切分规则对应的切分类，写死，需要哪种规则则配置哪种，例如本例子是按小时分片：io.mycat.route.function.LatestMonthPartion
 
 property 标签是切分规则对应的不同属性，不同的切分规则配置不同。
 
